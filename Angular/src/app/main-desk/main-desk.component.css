@@ -1,0 +1,19 @@
+.container{
+    width: 100vw;
+    min-height: 100vh;
+    background-color:gray;
+    
+
+    background-size: auto
+}
+
+.header{
+    display: flex;
+}
+.headerLogo{
+    font-family: 'Lobster', cursive;
+    font-size: 4rem;
+    margin-left: 20px;
+    color: white;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}

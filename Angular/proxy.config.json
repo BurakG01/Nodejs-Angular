@@ -1,0 +1,6 @@
+{
+    "/": {
+        "target": " http://geoapi.sanalonyedi.net/v1",
+        "secure": false
+    }
+}
