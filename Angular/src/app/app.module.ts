@@ -24,6 +24,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {DemoMaterialModule} from './lib';    
 import {MatNativeDateModule} from '@angular/material';   
+import {MatIconModule} from '@angular/material/icon';
 
 import { OrderModule } from 'ngx-order-pipe';
 
@@ -55,7 +56,8 @@ import { OrderModule } from 'ngx-order-pipe';
     InputTextModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    OrderModule
+    OrderModule,
+    MatIconModule
   ],
   providers: [ MyserviceService],
   bootstrap: [AppComponent],

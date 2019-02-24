@@ -21,7 +21,8 @@ declare interface AddressInfo {
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css']
+
 
 })
 

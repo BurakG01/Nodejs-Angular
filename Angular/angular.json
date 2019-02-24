@@ -23,11 +23,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
-              
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
              
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js",
+            "scripts": ["node_modules/jquery/dist/jquery-3.3.1.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
