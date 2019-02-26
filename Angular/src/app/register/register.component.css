@@ -1,29 +1,31 @@
 .formcontainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formbody{
-    display: flex;  
-    background-color: white;
-    box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 25px;
-    min-height: 635px;
+  display: flex;  
+  width: 360px;
+  min-height: 200px;
+  background-color: rgba(0, 0, 0, 0.5);;
+  box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 25px;
 }
 
 
-  .header{
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 20px;      
-  }
+.header{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;      
+}
 
 div > span {
-    font-size: 0.75rem;
-    color: firebrick;
+  font-weight: bold;
+  font-size:1rem;
+  color: firebrick;
 }
 .example-container {
     display: flex;
@@ -33,3 +35,31 @@ div > span {
  .example-container > * {
     width: 100%;
   }
+
+  ::ng-deep .mat-form-field-placeholder{
+
+    color:#fff
+  }
+  
+  ::ng-deep .mat-form-field-underline{
+  
+    background-color:turquoise ;
+  }
+  input,  textarea { 
+    color: white; 
+    }
+
+ .header{
+  color: rgb(144, 217, 223)
+ }
+ ::ng-deep .mat-select-content{
+  background-color: white;  
+ 
+}
+
+::ng-deep .mat-select-value-text {
+  color: white;
+}
+::ng-deep .mat-select-arrow {
+  color: #fff !important;
+}

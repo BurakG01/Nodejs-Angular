@@ -4,6 +4,7 @@ import { MyserviceService } from '../myservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise'
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { City } from '../models/cityInfo.model';
@@ -39,7 +40,8 @@ export class RegisterComponent implements OnInit {
   successMessage: String = '';
   constructor(private _myservice: MyserviceService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute) {
+    private _activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
     this.myForm = new FormGroup({
       email: new FormControl(null, Validators.email),
@@ -139,6 +141,8 @@ export class RegisterComponent implements OnInit {
     if (this.myForm.valid) {
       this._myservice.submitRegister(this.myForm.value)
         .toPromise().then((response) => {
+          this.toastr.success('Registration Success');
+
 
           this.successMessage = 'Registration Success'
         }).catch((err) => {

@@ -25,6 +25,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {DemoMaterialModule} from './lib';    
 import {MatNativeDateModule} from '@angular/material';   
 import {MatIconModule} from '@angular/material/icon';
+import { ToastrModule,ToastContainerModule  } from 'ngx-toastr';
+
 
 import { OrderModule } from 'ngx-order-pipe';
 
@@ -57,9 +59,12 @@ import { OrderModule } from 'ngx-order-pipe';
     MatAutocompleteModule,
     MatNativeDateModule,
     OrderModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot(),
+    ToastContainerModule
   ],
   providers: [ MyserviceService],
+  
   bootstrap: [AppComponent],
   
 })

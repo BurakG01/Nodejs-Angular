@@ -56,5 +56,5 @@ body {
   }
 
   .form-btn-hollow:hover{
-      background-color: white
+      background-color: rgba(0, 0, 0, 0.5);
   }
