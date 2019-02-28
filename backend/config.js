@@ -5,7 +5,6 @@ module.exports = {
     },
     host: "smtp.live.com",
     port: 587,
-    newPassword:'6451',
     mongoConnectionString:'mongodb://localhost/ricker'
     
 };

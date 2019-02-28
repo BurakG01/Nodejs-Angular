@@ -4,6 +4,7 @@ var User = require('../models/user');
 var dateFormat = require('dateformat');
 var nodemailer = require('nodemailer');
 const config=require('../config');
+const myFunctions=require('../myFunctions')
 
 router.post('/getpassword', function (req, res, next) {
 
@@ -12,6 +13,7 @@ router.post('/getpassword', function (req, res, next) {
     promise.then(function (doc) {
         if (doc) {
             if (doc.isDelete == false) {
+                var getNewPassword=myFunctions.getNewPassword()
 
                 var transporter = nodemailer.createTransport({
                     host:config.host,
@@ -26,7 +28,8 @@ router.post('/getpassword', function (req, res, next) {
                     from: config.auth.user,
                     to: req.body.email,
                     subject: 'New Password',
-                    text:'Your new password is :'+ config.password
+                    text:"Your new password is :"+getNewPassword
+                    
                 };
 
                 transporter.sendMail(mailOptions, function (error, info) {
@@ -36,7 +39,7 @@ router.post('/getpassword', function (req, res, next) {
 
                         User.findOneAndUpdate({ email: req.body.email }, {
                             $set: {
-                                "password": User.hashPassword(config.password),
+                                "password":User.hashPassword(getNewPassword),
                             }
                         }, { new: true }, (err, doc) => {
                             // burada onaylandi mesaji gonder
