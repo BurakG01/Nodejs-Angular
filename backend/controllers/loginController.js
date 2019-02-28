@@ -3,7 +3,43 @@ var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var dateFormat = require('dateformat');
+var nodemailer = require('nodemailer');
 router.post('/login', function (req, res, next) {
+  
+
+  /*var transporter = nodemailer.createTransport({
+    
+    //service: 'gmail',
+    host:"smtp.live.com",
+    port:587,
+
+    auth: {
+      user: 'gundogdu.burak@outlook.com',
+      pass: 'Burak.6451'
+    },
+    tls:{
+    rejectUnauthorized:false
+    }
+
+  });
+  
+  var mailOptions = {
+    from: 'gundogdu.burak@outlook.com',
+    to: 'gokcephlvn@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy :)!'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });*/
+
+
+
   let promise = User.findOne({ email: req.body.email }).exec();
 
   promise.then(function (doc) {

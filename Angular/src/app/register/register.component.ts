@@ -158,6 +158,8 @@ export class RegisterComponent implements OnInit {
   movetologin() {
     this._router.navigate(['../login'], { relativeTo: this._activatedRoute });
   }
+
+ 
 }
 
 

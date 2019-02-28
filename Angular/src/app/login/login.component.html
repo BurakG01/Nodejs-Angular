@@ -16,6 +16,11 @@
                 <span *ngIf="flag">{{errormessageForPasword}}</span>
                 <span *ngIf="isValid('password')">Password cannot be blank</span>
             </div>
+
+            <div style="margin-top:20px;">
+                <button class="gotopassword" mat-button (click)="moveToGetPass()">Forgot Password?</button>
+            </div>
+
             <div style="margin-top:20px;">
                 <button class="form-btn" (click)="login()">Sign In</button>
             </div>

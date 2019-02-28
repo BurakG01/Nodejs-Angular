@@ -17,6 +17,14 @@ export class MyserviceService {
 
  
   constructor(private _http: HttpClient) { }
+  getNewPassword(body:any)  {
+
+    return this._http.post('http://localhost:3000/api/getpassword', body,{
+      observe:'body'
+    })
+  }
+
+
 
   submitRegister(body:any){
     return this._http.post('http://localhost:3000/api/register', body,{

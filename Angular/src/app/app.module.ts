@@ -29,6 +29,7 @@ import { ToastrModule,ToastContainerModule  } from 'ngx-toastr';
 
 
 import { OrderModule } from 'ngx-order-pipe';
+import { ForgotpassComponent } from './forgotpass/forgotpass.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { OrderModule } from 'ngx-order-pipe';
     LoginComponent,
     RegisterComponent,
     UserDashboardComponent,
-    MainDeskComponent
+    MainDeskComponent,
+    ForgotpassComponent,
+   
   ],
   imports: [
     DemoMaterialModule,

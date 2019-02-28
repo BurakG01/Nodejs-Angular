@@ -1,0 +1,20 @@
+<div class="formcontainer">
+  <div class="formbody">
+    <form style="width:100%;" [formGroup]="loginForm">
+      <div class="header">New Password</div>
+      <a class="fa fa-arrow-circle-left" aria-hidden="true" (click)="goBackLogin()" style="font-size: x-large;
+      color: aquamarine;" ></a>
+      <div class="example-container">
+      
+        <mat-form-field style="width:100%;">
+          <input type="text" formControlName="email" matInput placeholder="Email" required>
+        </mat-form-field>
+        <span *ngIf="isValid('email')">Email cannot be blank</span>
+        <span *ngIf="flag">{{errormessageForEmail}}</span>
+      </div>
+      <div style="margin-top:20px;">
+        <button class="form-btn" (click)="getNewPass()">Send</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -65,4 +65,8 @@ export class LoginComponent implements OnInit {
    
     this._router.navigate(['../register'], { relativeTo: this._activatedRoute });
   }
+
+  moveToGetPass(){
+        this._router.navigate(['../forgotpass'], { relativeTo: this._activatedRoute });
+  }
 }

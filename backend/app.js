@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const config=require('./config')
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -11,12 +12,12 @@ var registerRouter=require('./controllers/registerController')
 var deleteRouter=require('./controllers/getAndDeleteUserController')
 var getUserRouter=require('./controllers/getAndDeleteUserController')
 var getAddressRouter=require('./controllers/adresController')
-
+var newPassRouter=require('./controllers/passwordController')
 var app = express();
 
 // add mongoose 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ricker');
+mongoose.connect(config.mongoConnectionString);
 
 // add cors 
 var cors = require('cors');
@@ -42,6 +43,8 @@ app.use('/api',registerRouter);
 app.use('/api',deleteRouter);
 app.use('/api',getUserRouter);
 app.use('/api',getAddressRouter)
+app.use('/api',newPassRouter)
+
 
 
 

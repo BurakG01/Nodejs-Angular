@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { MainDeskComponent } from './main-desk/main-desk.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import {ForgotpassComponent} from './forgotpass/forgotpass.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -13,10 +15,14 @@ const routes: Routes = [
       [
         {path: '', redirectTo: 'login', pathMatch: 'full'},
         { path: 'login', component: LoginComponent },
-        { path: 'register', component: RegisterComponent }
+        { path: 'register', component: RegisterComponent },
+        {path: 'forgotpass' , component: ForgotpassComponent},
+      
       ]
   },
-  {path: 'dash' , component: UserDashboardComponent}
+ 
+  {path: 'dash' , component: UserDashboardComponent},
+  
 ];
 
 @NgModule({
