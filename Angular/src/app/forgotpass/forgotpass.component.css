@@ -17,7 +17,7 @@
 
 div > span {
     font-size: 1rem;
-    font-weight: bold;
+    /*  font-weight: bold;*/
     color: firebrick;
 }
 
@@ -32,11 +32,6 @@ div > span {
 
 
  
-  .header{
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 40px;      
-}
 
 ::ng-deep .mat-form-field-placeholder{
 
@@ -51,7 +46,10 @@ input, select, textarea {
   color: white; 
   }
   .header{
-    color: rgb(144, 217, 223)
+    color: rgb(144, 217, 223);
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 20px;   
    }
 
    

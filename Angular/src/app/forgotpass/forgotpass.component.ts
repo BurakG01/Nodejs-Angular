@@ -12,16 +12,19 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './forgotpass.component.html',
   styleUrls: ['./forgotpass.component.css']
 })
+
+
 export class ForgotpassComponent implements OnInit {
 
   flag: Boolean = false;
   errormessageForEmail: String = '';
   errormessageForPasword: String = '';
   errormessage: String = '';
-  loginForm: FormGroup;
+  passwordForm: FormGroup;
   constructor(private _myservice: MyserviceService,
-  private _location:Location) {
-    this.loginForm = new FormGroup({
+  private _location:Location,
+  private _toastr: ToastrService) {
+    this.passwordForm = new FormGroup({
       email: new FormControl(null, Validators.required),
      
     });
@@ -36,19 +39,23 @@ export class ForgotpassComponent implements OnInit {
 
 
   isValid(controlName) {
-    return this.loginForm.get(controlName).invalid && this.loginForm.get(controlName).touched;
+    return this.passwordForm.get(controlName).invalid && this.passwordForm.get(controlName).touched;
   }
   // burayi duzenle 
   getNewPass(){
-    console.log(this.loginForm.value);
+    
 
-    if (this.loginForm.valid) {
-      this._myservice.getNewPassword(this.loginForm.value).toPromise().then((response)=>{
+    if (this.passwordForm.valid) {
+      this._myservice.getNewPassword(this.passwordForm.value).toPromise().then((response:any)=>{
+           
+          
+        this._toastr.success(response.message);
 
-        console.log(response)
+        
      
       }).catch((err)=>{
-     
+        console.log(err)
+         this._toastr.error(err.error.message)
         
       })
     

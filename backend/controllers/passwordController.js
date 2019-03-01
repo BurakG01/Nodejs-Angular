@@ -42,10 +42,11 @@ router.post('/getpassword', function (req, res, next) {
                                 "password":User.hashPassword(getNewPassword),
                             }
                         }, { new: true }, (err, doc) => {
-                            // burada onaylandi mesaji gonder
-                            console.log('Email sent: ' + info.response);
                             
-                            return res.status(201).json(doc);
+                            if(doc){
+                                console.log('Email sent: ' + info.response);
+                                return res.status(200).json({message:'New password was sent'});
+                            }
                         }
                         )
                        
