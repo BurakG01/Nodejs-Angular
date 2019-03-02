@@ -13,9 +13,9 @@ router.post('/register', function (req, res, next) {
       deletion_dt: null,
       updated_dt: null,
       phone_number: req.body.phone_number,
-      city:req.body.city,
-      town:req.body.town,
-      district:req.body.district
+      address:req.body.address,
+      location:req.body.location,
+      isBenefactor:req.body.isBenefactor
   
     });
     let promise = User.findOne({ email: req.body.email }).exec();
@@ -27,12 +27,16 @@ router.post('/register', function (req, res, next) {
         else {
           User.findOneAndUpdate({ email: req.body.email }, {
             $set: {
-              "isDelete": false, "email": req.body.email,
+              "isDelete": false, 
+              "email": req.body.email,
               "username": req.body.username,
               "password": User.hashPassword(req.body.password),
               "bloodGroup": req.body.bloodGroup,
               "phone_number": req.body.phone_number,
-              "updated_dt": Date.now()
+              "updated_dt": Date.now(),
+              "location":req.body.location,
+              "address":req.body.address ,
+              "isBeneficator":req.body.isBeneficator
             }
           }, { new: true }, (err, doc) => {
   

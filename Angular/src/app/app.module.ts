@@ -27,6 +27,7 @@ import {MatNativeDateModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { ToastrModule,ToastContainerModule  } from 'ngx-toastr';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 import { OrderModule } from 'ngx-order-pipe';
@@ -66,7 +67,8 @@ import { ForgotpassComponent } from './forgotpass/forgotpass.component';
     MatIconModule,
     ToastrModule.forRoot(),
     ToastContainerModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    MatSlideToggleModule
   ],
   providers: [ MyserviceService],
   

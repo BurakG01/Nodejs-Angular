@@ -7,39 +7,6 @@ var nodemailer = require('nodemailer');
 router.post('/login', function (req, res, next) {
   
 
-  /*var transporter = nodemailer.createTransport({
-    
-    //service: 'gmail',
-    host:"smtp.live.com",
-    port:587,
-
-    auth: {
-      user: 'gundogdu.burak@outlook.com',
-      pass: 'Burak.6451'
-    },
-    tls:{
-    rejectUnauthorized:false
-    }
-
-  });
-  
-  var mailOptions = {
-    from: 'gundogdu.burak@outlook.com',
-    to: 'gokcephlvn@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy :)!'
-  };
-  
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });*/
-
-
-
   let promise = User.findOne({ email: req.body.email }).exec();
 
   promise.then(function (doc) {
@@ -47,11 +14,14 @@ router.post('/login', function (req, res, next) {
       if (doc.isDelete == false) {
 
         if (doc.isValid(req.body.password)) {
-          // generate token
+        
+          // burada bir token uretiyoruz main deskten bu tokenla istek yaptigimzda 
+          // asagidaki datalari alabilir . buraya sonradan data ekleyecez .
           let token = jwt.sign({
             username: doc.username,
             id: doc.id,
-            isDelete: doc.isDelete
+            isDelete: doc.isDelete,
+            bloodGroup:doc.bloodGroup
           }, 'secret', { expiresIn: '3h' });
 
           return res.status(200).json(token);

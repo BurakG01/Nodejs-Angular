@@ -8,17 +8,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { City } from '../models/cityInfo.model';
+import { TestBed } from '@angular/core/testing';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 
 
-declare interface AddressInfo {
-  name: string;
-  id: string;
-  location?: {
-    lat: string;
-    lon: string;
-  }
-}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -28,12 +22,8 @@ declare interface AddressInfo {
 })
 
 
-
 export class RegisterComponent implements OnInit {
-
-  townsInfo: AddressInfo[] = [];
-  citiesInfo: AddressInfo[] = [];
-  districtsInfo: AddressInfo[] = [];
+  
   myForm: FormGroup;
   flag: Boolean = false;
   errormessage: String = '';
@@ -50,12 +40,11 @@ export class RegisterComponent implements OnInit {
       cnfpass: new FormControl(null, this.passValidator),
       bloodGroup: new FormControl(null, Validators.required),
       phone_number: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      town: new FormControl(null, Validators.required),
-      district: new FormControl(null, Validators.required),
-
+      address:new FormControl(null,Validators.required),
+      location:new FormControl(null,Validators.required),
+      isBenefactor:new FormControl(null)
     });
-
+   
     this.myForm.controls.password.valueChanges
       .subscribe(
         x => this.myForm.controls.cnfpass.updateValueAndValidity()
@@ -65,53 +54,8 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  async getTowns(selectedCityId: any) {
-    this.townsInfo.length = 0;
-    const response = await this._myservice.getTowns(selectedCityId)
-    response.data.map((iter) => {
-      this.townsInfo.push({
-        name: iter.name, id: iter._id, location: {
-          lat: iter.geolocation.lat,
-          lon: iter.geolocation.lon
-        }
-      })
-    })
-    console.log(this.townsInfo)
-
-  }
-  async getDistricts(SelectedTownId: any) {
-    this.districtsInfo.length = 0;
-    const response = await this._myservice.getDistricts(SelectedTownId)
-    if (response.data.length > 3) {
-      response.data.map((iter) => {
-        this.districtsInfo.push({ name: iter.name, id: iter._id })
-      })
-    } else {
-      const response = await this._myservice.getNeighborhoods(SelectedTownId)
-      response.data.map((iter) => {
-        this.districtsInfo.push({ name: iter.name, id: iter._id })
-      })
-    }
-
-    console.log(this.districtsInfo)
-  }
-
-  test(item: any): void {
-    console.log(item)
-  }
-  async ngOnInit() {
-    const response = await this._myservice.getCities()
-    console.log(response)
-    response.data.map((iter) => {
-
-      this.citiesInfo.push({
-        name: iter.name, id: iter._id, location: {
-          lat: iter.geolocation.lat,
-          lon: iter.geolocation.lon
-        }
-      })
-    })
-
+   ngOnInit() {
+    this.myForm.patchValue({isBenefactor:false})
   }
 
   isValid(controlName) {
@@ -136,12 +80,26 @@ export class RegisterComponent implements OnInit {
 
     return null;
   }
+ 
+  handleAddressChange(address: Address){
+   
+  this.myForm.patchValue({location:address})
+  }
+ 
 
   register() {
+    //console.log(this.myForm.value)
     if (this.myForm.valid) {
+   
       this._myservice.submitRegister(this.myForm.value)
         .toPromise().then((response) => {
+          //console.log(this.myForm.value)
           this.toastr.success('Registration Success');
+          setTimeout(() => {
+            
+            this._router.navigate(['../login'], { relativeTo: this._activatedRoute });
+        }, 5000); 
+          
 
 
           this.successMessage = 'Registration Success'
@@ -152,8 +110,6 @@ export class RegisterComponent implements OnInit {
         })
     }
   }
-
-
 
   movetologin() {
     this._router.navigate(['../login'], { relativeTo: this._activatedRoute });

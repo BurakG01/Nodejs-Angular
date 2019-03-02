@@ -12,10 +12,9 @@ var schema = new Schema({
     deletion_dt:{type:Date},
     updated_dt:{type:Date},
     phone_number:{type:String, require:true},
-    city : {type:Object, require:true},
-    town : {type:Object, require:true},
-    district : {type:Object, require:true},
-   
+    address:{type:String,require:true},
+    location:{type:Object,require:true},
+    isBenefactor:{type:Boolean,require:true}
 });
 
 schema.statics.hashPassword = function hashPassword(password){

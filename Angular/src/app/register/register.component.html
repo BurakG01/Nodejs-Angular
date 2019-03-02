@@ -3,143 +3,122 @@
         <form style="width:100%;" [formGroup]="myForm">
             <div class="header">Register Form</div>
             <div class="container-fluid">
-                
-                   
-<!--<input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
-  <div class="example-container">-->
-                        <mat-form-field >
-                             
-                            <input type="text" formControlName="email" matInput placeholder="Email" id="email" required>
-                          
-                        </mat-form-field>
-                        <span *ngIf="flag">{{errormessage}}</span>
-                        <span *ngIf="isValid('email')">Entered email is invalid</span>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="example-container">
+                            <mat-form-field>
+                                <input type="text" formControlName="email" matInput placeholder="Email" id="email"
+                                    required>
+                            </mat-form-field>
+                            <span *ngIf="flag">{{errormessage}}</span>
+                            <span *ngIf="isValid('email')">Entered email is invalid</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="example-container">
+                            <mat-form-field>
+                                <input ngx-google-places-autocomplete [options]="{
+                                    types: [],
+                                    componentRestrictions: { country: 'TUR' }
+                                    }" matInput #placesRef="ngx-places" formControlName="address" id="address"
+                                    placeholder="Address" (onAddressChange)="handleAddressChange($event)" required />
+                            </mat-form-field>
+                            <span *ngIf="isValid('address')">Address is required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col-md-6">
+                        <div class="example-container">
+                            <mat-form-field style="width:100%;">
+                                <input type="text" formControlName="username" matInput placeholder="Username" id="user"
+                                    required>
+                            </mat-form-field>
+                            <span *ngIf="isValid('username')">Username is required</span>
+                        </div>
                     </div>
 
-                 
-               
+
+                    <div class="col-md-6">
+                        <div class="example-container">
+                            <mat-form-field style="width:100%;">
+                                <input type="text" formControlName="phone_number" matInput placeholder="Phone"
+                                    id="phone_number" mask="(000) 000-0000" required>
+                            </mat-form-field>
+                            <span *ngIf="isValid('phone_number')">Phone is a mandatory field</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                <div class="col-md-6">
+
+                    <div class="col-md-6">
                         <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <input type="text" formControlName="username" matInput placeholder="Username" id="user"required>
-                    </mat-form-field>
-                    <span *ngIf="isValid('username')">Username is required</span>
+                            <mat-form-field style="width:100%;">
+                                <input type="password" formControlName="password" matInput placeholder="Password"
+                                    id="pass" required>
+
+                            </mat-form-field>
+                            <span *ngIf="isValid('password')">Password is a mandatory field</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="example-container">
+                            <mat-form-field style="width:100%;">
+                                <input type="password" formControlName="cnfpass" matInput
+                                    placeholder="Re-enter Password" id="cnfpass" required>
+                            </mat-form-field>
+                            <span *ngIf="isValid('cnfpass')">Password and confirm password should match</span>
+                        </div>
+                    </div>
                 </div>
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="example-container">
+                            <mat-form-field style="width:100%;">
+                                <mat-select placeholder="Blood Group" formControlName="bloodGroup" required>
+                                    <mat-option value="Arh+">Arh+</mat-option>
+                                    <mat-option value="Brh+">Brh+</mat-option>
+                                    <mat-option value="ABrh+">ABrh+</mat-option>
+                                    <mat-option value="0rh+">0rh+</mat-option>
+                                    <mat-option value="Arh+">Arh-</mat-option>
+                                    <mat-option value="Brh+">Brh-</mat-option>
+                                    <mat-option value="ABrh+">ABrh-</mat-option>
+                                    <mat-option value="0rh+">0rh-</mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                            <span *ngIf="isValid('bloodGroup')">BloodGroup is required</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="example-container">
+                         
+                                <mat-slide-toggle formControlName="isBenefactor">Benefactor</mat-slide-toggle>
+                            </div>
+                    </div>
 
 
-                <div class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <input type="text" formControlName="phone_number" matInput placeholder="Phone" id="phone_number"
-                            mask="(000) 000-0000" required>
-                    </mat-form-field>
-                    <span *ngIf="isValid('phone_number')">Phone is a mandatory field</span>
                 </div>
-            </div>
-            </div>
-            <div class="row">
-                
-                <div class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <input type="password" formControlName="password" matInput placeholder="Password" id="pass" required>
 
-                    </mat-form-field>
-                    <span *ngIf="isValid('password')">Password is a mandatory field</span>
-                </div>
-            </div>
-                <div class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <input type="password" formControlName="cnfpass" matInput placeholder="Re-enter Password"
-                            id="cnfpass" required>
-                    </mat-form-field>
-                    <span *ngIf="isValid('cnfpass')">Password and confirm password should match</span>
-                </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <mat-select #selectCity (change)="getTowns(selectCity.value.id)" placeholder="City"
-                            formControlName="city" required>
-                            <mat-option *ngFor="let city of citiesInfo | orderBy :'name' " [value]="city">
-                                {{city.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <span *ngIf="isValid('city')"> City is a mandatory field</span>
-                </div>
-            </div>
-                <div class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <mat-select #selectTown (change)="getDistricts(selectTown.value.id)" placeholder="Town"
-                            formControlName="town" required>
-                            <mat-option *ngFor="let town of townsInfo | orderBy :'name' " [value]="town">
-                                {{town.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <span *ngIf="isValid('town')"> Town is a mandatory field</span>
-                </div>
-            </div>
-        </div>
-            <div class="row">
-                <div  class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <mat-select #selectDistrict (change)="test(selectDistrict.value)" placeholder="District"
-                            formControlName="district" required>
-                            <mat-option *ngFor="let district of districtsInfo | orderBy :'name' " [value]="district">
-                                {{district.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <span *ngIf="isValid('district')"> District is a mandatory field</span>
-                </div>
-            </div>
-
-                <div  class="col-md-6">
-                        <div class="example-container">
-                    <mat-form-field style="width:100%;">
-                        <mat-select placeholder="Blood Group" formControlName="bloodGroup" required> 
-                            <mat-option value="Arh+">Arh+</mat-option>
-                            <mat-option value="Brh+">Brh+</mat-option>
-                            <mat-option value="ABrh+">ABrh+</mat-option>
-                            <mat-option value="0rh+">0rh+</mat-option>
-                            <mat-option value="Arh+">Arh-</mat-option>
-                            <mat-option value="Brh+">Brh-</mat-option>
-                            <mat-option value="ABrh+">ABrh-</mat-option>
-                            <mat-option value="0rh+">0rh-</mat-option>
-
-                        </mat-select>
-                    </mat-form-field>
-                    <span *ngIf="isValid('bloodGroup')">BloodGroup is required</span>
-                </div>
-            </div>
-            </div>
                 <div style="margin-top:20px;">
                     <button class="form-btn" (click)="register()">Register</button>
                 </div>
 
-            <!--    <div style="text-align: center;">
-                    {{successMessage}}
-                </div>-->
 
-                <div>
-                    <div style="margin-top:20px;">
-                        <button class="form-btn-hollow" (click)="movetologin()">Login</button>
+                <div style="margin-top:20px;">
+                    <button class="form-btn-hollow" (click)="movetologin()">Login</button>
 
-                    </div>
                 </div>
-            
 
 
             </div>
+
+
+
         </form>
     </div>
 </div>

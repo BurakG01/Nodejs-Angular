@@ -63,3 +63,23 @@ div > span {
 ::ng-deep .mat-select-arrow {
   color: #fff !important;
 }
+
+
+
+::ng-deep .mat-slide-toggle-label {
+  padding: 0.375em 0px !important;
+  border-top: 1.5555em solid transparent !important;
+  
+}
+
+
+::ng-deep.mat-slide-toggle-content {
+ 
+  color: white !important;
+  font-size: medium !important;
+}
+
+::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: turquoise !important ;
+}
+

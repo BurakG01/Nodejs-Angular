@@ -28,44 +28,31 @@ export class ForgotpassComponent implements OnInit {
       email: new FormControl(null, Validators.required),
      
     });
-
-
-
   }
 
   ngOnInit() {
   }
-
-
-
   isValid(controlName) {
     return this.passwordForm.get(controlName).invalid && this.passwordForm.get(controlName).touched;
   }
   // burayi duzenle 
   getNewPass(){
-    
-
     if (this.passwordForm.valid) {
       this._myservice.getNewPassword(this.passwordForm.value).toPromise().then((response:any)=>{
-           
-          
         this._toastr.success(response.message);
-
+        setTimeout(() => {
+          this._location.back();
+        }, 5000);
         
-     
       }).catch((err)=>{
         console.log(err)
          this._toastr.error(err.error.message)
-        
       })
-    
     }
     
   }
-
   goBackLogin(){
    this._location.back();
   }
-
 
 }
