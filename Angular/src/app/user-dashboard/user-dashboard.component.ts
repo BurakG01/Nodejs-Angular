@@ -38,4 +38,7 @@ export class UserDashboardComponent implements OnInit {
     localStorage.removeItem('token');
     this._router.navigate(['/main/login']);
   }
+  getBloodGroups(bloodGroup){
+    console.log(bloodGroup)
+  }
 }
