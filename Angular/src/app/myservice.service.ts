@@ -17,9 +17,15 @@ export class MyserviceService {
 
  
   constructor(private _http: HttpClient) { }
-  getNewPassword(body:any)  {
+  getConfirmationCode(body:any)  {
 
-    return this._http.post('http://localhost:3000/api/getpassword', body,{
+    return this._http.post('http://localhost:3000/api/getconfirmationcode', body,{
+      observe:'body'
+    })
+  }
+
+  getUpdatePass(body:any){
+    return this._http.post('http://localhost:3000/api/updatepassword', body,{
       observe:'body'
     })
   }

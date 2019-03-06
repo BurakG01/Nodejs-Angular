@@ -1,9 +1,9 @@
 <div class="formcontainer">
   <div class="formbody">
-    <form style="width:100%;" [formGroup]="passwordForm">
+    <form style="width:100%;" [formGroup]="passwordForm" *ngIf="!emailSend">
       <a class="fa fa-arrow-circle-left" aria-hidden="true" (click)="goBackLogin()" style="font-size: x-large;
       color: aquamarine;" ></a>
-      <div class="header">New Password</div>
+      <div class="header">Confirmation Code</div>
       
       <div class="example-container">
       
@@ -14,8 +14,52 @@
         <span *ngIf="flag">{{errormessageForEmail}}</span>
       </div>
       <div style="margin-top:20px;">
-        <button class="form-btn" (click)="getNewPass()">Send</button>
+        <button class="form-btn" (click)="getConfirmationCode()">Send</button>
       </div>
+
+  
+    </form>
+
+    
+    <form style="width:100%;" [formGroup]="updatePassword"*ngIf="emailSend">
+      <a class="fa fa-arrow-circle-left" aria-hidden="true" (click)="goBackLogin()" style="font-size: x-large;
+      color: aquamarine;" ></a>
+      <div class="header">Update Password</div>
+      
+      <div class="example-container"*ngIf="updatePassword.controls['confirmationCode'].value!=confirmationcode">
+      
+        <mat-form-field style="width:100%;">
+          <input type="text" formControlName="confirmationCode" matInput placeholder="confirmationCode" required>
+        </mat-form-field>
+        <span *ngIf="updatePassword.controls['confirmationCode'].value!=confirmationcode&&updatePassword.controls['confirmationCode'].touched">Confirm Code does not match </span>
+        
+      </div>
+   
+
+      <div class="example-container" *ngIf="updatePassword.controls['confirmationCode'].value==confirmationcode">
+      
+        <mat-form-field style="width:100%;">
+          <input type="password" formControlName="password" matInput placeholder="password" required>
+        </mat-form-field>
+        <span *ngIf="isValidForUpdatePassword('password')">password cannot be blank</span>
+        
+      </div>
+
+
+      <div class="example-container">
+      
+        <mat-form-field style="width:100%;"*ngIf="updatePassword.controls['confirmationCode'].value==confirmationcode">
+          <input type="password" formControlName="reEnterPass" id="reEnterPass" matInput placeholder="Re-enter password" required>
+        </mat-form-field>
+       
+        <span *ngIf="isValidForUpdatePassword('reEnterPass')">Password and confirm password should match</span>
+        
+      </div>
+
+      <div style="margin-top:20px;"*ngIf="updatePassword.controls['confirmationCode'].value==confirmationcode">
+        <button class="form-btn" (click)="getUpdatePass()">Update</button>
+      </div>
+  
     </form>
   </div>
 </div>

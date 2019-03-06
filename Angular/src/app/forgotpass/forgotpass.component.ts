@@ -6,6 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise'
 import { ToastrService } from 'ngx-toastr';
+import { validateConfig } from '@angular/router/src/config';
+
+
+
+
+declare interface USERINFORMATION {
+  password: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-forgotpass',
@@ -16,18 +25,35 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ForgotpassComponent implements OnInit {
 
-  flag: Boolean = false;
+  userinformation={} as USERINFORMATION
+  
   errormessageForEmail: String = '';
   errormessageForPasword: String = '';
   errormessage: String = '';
+  emailSend:Boolean = false;
+  confirmationcode:String='';
   passwordForm: FormGroup;
+  updatePassword: FormGroup;
+  _activatedRoute: ActivatedRoute;
   constructor(private _myservice: MyserviceService,
   private _location:Location,
-  private _toastr: ToastrService) {
+  private _toastr: ToastrService,
+  private _router: Router,) {
+    this.updatePassword=new FormGroup({
+      confirmationCode:new FormControl(null,[Validators.max(5),Validators.required] ),
+      password:new FormControl(null, Validators.required),
+      reEnterPass:new FormControl(null, this.passValidator),
+    })
     this.passwordForm = new FormGroup({
       email: new FormControl(null, Validators.required),
      
     });
+
+    this.updatePassword.controls.password.valueChanges
+    .subscribe(
+      x => this.updatePassword.controls.reEnterPass.updateValueAndValidity()
+    );
+  
   }
 
   ngOnInit() {
@@ -35,17 +61,43 @@ export class ForgotpassComponent implements OnInit {
   isValid(controlName) {
     return this.passwordForm.get(controlName).invalid && this.passwordForm.get(controlName).touched;
   }
+  isValidForUpdatePassword(controlName) {
+    return this.updatePassword.get(controlName).invalid && this.updatePassword.get(controlName).touched;
+  }
+
+
+  passValidator(control: AbstractControl) {
+    if (control && (control.value !== null || control.value !== undefined)) {
+      const cnfpassValue = control.value;
+
+      const passControl = control.root.get('password');
+      if (passControl) {
+        const passValue = passControl.value;
+        if (passValue !== cnfpassValue || passValue === '') {
+          return {
+            isError: true
+          };
+        }
+      }
+    }
+
+    return null;
+  }
   // burayi duzenle 
-  getNewPass(){
+  getConfirmationCode(){
     if (this.passwordForm.valid) {
-      this._myservice.getNewPassword(this.passwordForm.value).toPromise().then((response:any)=>{
+      this.userinformation.email=this.passwordForm.value.email;
+      
+      this._myservice.getConfirmationCode(this.passwordForm.value).toPromise().then((response:any)=>{
+       
+        console.log(response.confirmationCode)
+        this.confirmationcode=response.confirmationCode;
+        this.emailSend=true;
+       
         this._toastr.success(response.message);
-        setTimeout(() => {
-          this._location.back();
-        }, 5000);
         
       }).catch((err)=>{
-        console.log(err)
+        
          this._toastr.error(err.error.message)
       })
     }
@@ -54,5 +106,27 @@ export class ForgotpassComponent implements OnInit {
   goBackLogin(){
    this._location.back();
   }
+
+
+  getUpdatePass(){
+    if(this.updatePassword.valid){
+      this.userinformation.password=this.updatePassword.get('password').value;
+     this._myservice.getUpdatePass(this.userinformation).toPromise().then((response:any)=>{
+      this._toastr.success(response.message);
+         setTimeout(() => {
+           this._location.back();
+         }, 5000);
+  
+      
+     }).catch((err)=>{
+      this._toastr.error(err.error.message);
+
+     })
+
+    }
+
+  }
+
+
 
 }
