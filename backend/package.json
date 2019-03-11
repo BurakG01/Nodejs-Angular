@@ -9,6 +9,7 @@
     "bcrypt": "^2.0.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
+    "cryptr": "^4.0.2",
     "dateformat": "^3.0.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",

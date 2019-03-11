@@ -15,6 +15,7 @@ var schema = new Schema({
     address:{type:String,require:true},
     location:{type:Object,require:true},
     isBenefactor:{type:Boolean,require:true}
+    
 });
 
 schema.statics.hashPassword = function hashPassword(password){
@@ -22,7 +23,12 @@ schema.statics.hashPassword = function hashPassword(password){
 }
 
 schema.methods.isValid = function(hashedpassword){
+
+    console.log(this.password)
+    console.log(hashedpassword)
     return  bcrypt.compareSync(hashedpassword, this.password);
 }
+
+
 
 module.exports = mongoose.model('User',schema);

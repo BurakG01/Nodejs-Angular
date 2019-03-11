@@ -3,7 +3,6 @@ var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var dateFormat = require('dateformat');
-var nodemailer = require('nodemailer');
 router.post('/login', function (req, res, next) {
   
 
@@ -14,7 +13,7 @@ router.post('/login', function (req, res, next) {
       if (doc.isDelete == false) {
 
         if (doc.isValid(req.body.password)) {
-        
+         
           // burada bir token uretiyoruz main deskten bu tokenla istek yaptigimzda 
           // asagidaki datalari alabilir . buraya sonradan data ekleyecez .
           let token = jwt.sign({
