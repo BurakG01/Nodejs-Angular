@@ -1,29 +1,60 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef ,EventEmitter,Output  } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import Chart from 'chart.js';
+import {FormControl ,FormGroup} from '@angular/forms';
+import { MysecondserviceService } from '../mysecondservice.service';
+import {searchDataInterface} from './searchDataInterface'
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
+  @Output() valueChange = new EventEmitter();
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    options=new Array()
+    myControl = new FormControl();
+    //options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
 
     public isCollapsed = true;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private mySecondService:MysecondserviceService,) {
       this.location = location;
           this.sidebarVisible = false;
+
+          this.mySecondService.getSearchData().toPromise().then((response:searchDataInterface[])=>{
+           response.map((iter,index)=>{
+          this.options[index]=iter.blodGroupAndCity
+           })
+          })
+
+          
     }
 
+    
+    
+
     ngOnInit(){
+      this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+       
+      );
+     
+
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -36,6 +67,22 @@ export class NavbarComponent implements OnInit {
          }
      });
     }
+
+    private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
+   SearcValue(){
+
+      this.valueChange.emit(this.myControl.value)
+      localStorage.setItem('searchValue',this.myControl.value);
+      setTimeout(() => {
+        this.router.navigate(['/maps'])
+      }, 1000);
+    // console.log( this.myControl.value)
+    }
+      
     logout(){
       localStorage.removeItem('token');
       this.router.navigate(['/main/login']);

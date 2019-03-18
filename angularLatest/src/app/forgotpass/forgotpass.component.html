@@ -22,7 +22,7 @@
 
     
     <form style="width:100%;" [formGroup]="updatePassword"*ngIf="emailSend">
-      <a class="fa fa-arrow-circle-left" aria-hidden="true" (click)="goBackLogin()" style="font-size: x-large;
+      <a class="fa fa-arrow-circle-left" aria-hidden="true" [routerLink]="['/main/login']" style="font-size: x-large;
       color: aquamarine;" ></a>
       <div class="header">Update Password</div>
       

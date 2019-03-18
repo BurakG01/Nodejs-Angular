@@ -29,7 +29,12 @@ export class MyserviceService {
       observe:'body'
     })
   }
-
+  getSearchData(body:any){
+    return this._http.post('http://localhost:3000/api/search', body,{
+      observe:'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    })
+  }
 
 
   submitRegister(body:any){
@@ -54,6 +59,13 @@ export class MyserviceService {
 
   getUserInfo() {
     return this._http.get('http://localhost:3000/api/userinfo', {
+      observe: 'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    });
+  }
+
+  UpdateProfile(body:any) {
+    return this._http.post('http://localhost:3000/api/update',body, {
       observe: 'body',
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });

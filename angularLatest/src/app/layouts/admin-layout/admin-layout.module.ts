@@ -16,6 +16,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material';
+
+
 
 @NgModule({
   imports: [
@@ -27,7 +32,10 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     MatSlideToggleModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatInputModule
 
   ],
   declarations: [
@@ -39,7 +47,9 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-  ]
+   
+  ],
+ 
 })
 
 export class AdminLayoutModule { }

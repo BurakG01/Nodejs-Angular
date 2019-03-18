@@ -17,6 +17,7 @@
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.4.14",
+    "mongoose-unique-validator": "^2.0.2",
     "morgan": "^1.9.1",
     "nodemailer": "^5.1.1",
     "request": "^2.88.0",

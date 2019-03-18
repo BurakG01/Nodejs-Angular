@@ -5,10 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise'
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { City } from '../models/cityInfo.model';
-import { TestBed } from '@angular/core/testing';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 

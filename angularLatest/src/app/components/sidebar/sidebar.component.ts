@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MysecondserviceService } from '../mysecondservice.service';
 
 import { Router } from '@angular/router';
@@ -28,6 +28,7 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+ 
   username = '';
   menuItems: any[];
    constructor(private mySecondService:MysecondserviceService,
@@ -41,6 +42,7 @@ export class SidebarComponent implements OnInit {
      }
 
   ngOnInit() {
+   
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {

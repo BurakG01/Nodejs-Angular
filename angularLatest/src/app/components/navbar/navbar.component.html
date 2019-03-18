@@ -19,18 +19,52 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
           <form>
-            <div class="input-group no-border">
+
+              <div class="input-group no-border">
+                  <input type="text"  class="form-control" placeholder="Pick one" aria-label="Number" [formControl]="myControl" [matAutocomplete]="auto">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="now-ui-icons ui-1_zoom-bold"  (click)="SearcValue()"></i>
+                    </div>
+                  </div>
+                </div>
+              
+            
+                
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async " [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+              
+                  
+
+             
+             <!--  <div class="input-group no-border">
+                  <input type="text"  class="form-control" value="" placeholder="Search...">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </div>
+                  </div>
+                </div>
+             <mat-autocomplete  #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of options" [value]="option">
+                    {{ option.City}}
+                  </mat-option>
+                </mat-autocomplete>
+           <div class="input-group no-border">
               <input type="text" value="" class="form-control" placeholder="Search...">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="now-ui-icons ui-1_zoom-bold"></i>
                 </div>
               </div>
-            </div>
+            </div>-->
           </form>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#pablo">
+              <a class="nav-link"  [routerLink]="['/dashboard']">
                 <i class="now-ui-icons media-2_sound-wave"></i>
                 <p>
                   <span class="d-lg-none d-md-block">Stats</span>
@@ -38,7 +72,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#pablo">
+              <a class="nav-link" [routerLink]="['/dashboard']">
                 <i class="now-ui-icons location_world"></i>
                 <p>
                   <span class="d-lg-none d-md-block">Account</span>
@@ -53,9 +87,9 @@
                 </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <a class="dropdown-item" (click)="logout()">Log out</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href ng-click="logout()">Log out</a>
+                <a class="dropdown-item"  [routerLink]="['/dashboard']" >Another action</a>
+                <a class="dropdown-item"  [routerLink]="['/dashboard']">Something else here</a>
               </div>
             </li>
           

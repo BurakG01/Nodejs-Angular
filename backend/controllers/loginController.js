@@ -4,7 +4,8 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var dateFormat = require('dateformat');
 router.post('/login', function (req, res, next) {
-  
+
+ 
 
   let promise = User.findOne({ email: req.body.email }).exec();
 
