@@ -23,22 +23,19 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    options=new Array()
+   
     myControl = new FormControl();
     //options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+
 
     public isCollapsed = true;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router,private mySecondService:MysecondserviceService,) {
+    constructor(location: Location,  private element: ElementRef,
+       private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
 
-          this.mySecondService.getSearchData().toPromise().then((response:searchDataInterface[])=>{
-           response.map((iter,index)=>{
-          this.options[index]=iter.blodGroupAndCity
-           })
-          })
+     
 
           
     }
@@ -47,12 +44,7 @@ export class NavbarComponent implements OnInit {
     
 
     ngOnInit(){
-      this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-       
-      );
+  
      
 
       this.listTitles = ROUTES.filter(listTitle => listTitle);
@@ -68,12 +60,8 @@ export class NavbarComponent implements OnInit {
      });
     }
 
-    private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-  
-      return this.options.filter(option => option.toLowerCase().includes(filterValue));
-    }
-   SearcValue(){
+ 
+ /*  SearcValue(){
 
       this.valueChange.emit(this.myControl.value)
       localStorage.setItem('searchValue',this.myControl.value);
@@ -81,7 +69,7 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/maps'])
       }, 1000);
     // console.log( this.myControl.value)
-    }
+    }*/
       
     logout(){
       localStorage.removeItem('token');

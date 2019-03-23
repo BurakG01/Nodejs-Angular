@@ -13,6 +13,8 @@ var deleteRouter=require('./controllers/getAndDeleteUserController')
 var getUserRouter=require('./controllers/getAndDeleteUserController')
 var getAddressRouter=require('./controllers/adresController')
 var newPassRouter=require('./controllers/passwordController')
+var searchedUsers=require('./controllers/getSearchedUsersController')
+var recordStatistics=require('./controllers/getRecordStatisticsController')
 var app = express();
 
 // add mongoose 
@@ -44,6 +46,8 @@ app.use('/api',deleteRouter);
 app.use('/api',getUserRouter);
 app.use('/api',getAddressRouter)
 app.use('/api',newPassRouter)
+app.use('/api',searchedUsers)
+app.use('/api',recordStatistics)
 
 
 

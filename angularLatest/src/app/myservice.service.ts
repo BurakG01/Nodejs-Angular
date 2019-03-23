@@ -56,6 +56,12 @@ export class MyserviceService {
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
   }
+getRecordStatistics() {
+    return this._http.get('http://localhost:3000/api/recordstatistics', {
+      observe: 'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    });
+  }
 
   getUserInfo() {
     return this._http.get('http://localhost:3000/api/userinfo', {

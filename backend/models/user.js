@@ -17,7 +17,9 @@ var schema = new Schema(
     address:{type:String,require:true},
     location:{type:Object,require:true},
     isBenefactor:{type:Boolean,require:true},
-    bloodAndCity:{type:String}
+    bloodAndCity:{type:String},
+    city:{type:String}
+
 
 });
 

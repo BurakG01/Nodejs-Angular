@@ -5,7 +5,27 @@
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header ">
-          Google Maps
+          <div class="col-md-4">
+          <form>
+
+            <div class="input-group no-border">
+                <input type="text"  class="form-control" placeholder="Enter BloodGroup & City" aria-label="Number" [formControl]="myControl" [matAutocomplete]="auto">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                      <i class="now-ui-icons ui-1_zoom-bold"  (click)="SearcValue()"></i>
+                  </div>
+                </div>
+              </div>
+            
+          
+              
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async " [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </form>
+            </div>
         </div>
         <div class="card-body ">
           <div id="map" class="map"></div>

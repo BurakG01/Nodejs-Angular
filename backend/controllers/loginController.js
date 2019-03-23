@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var dateFormat = require('dateformat');
+const myfunctions = require('../myFunctions');
 router.post('/login', function (req, res, next) {
 
  
@@ -17,11 +18,14 @@ router.post('/login', function (req, res, next) {
          
           // burada bir token uretiyoruz main deskten bu tokenla istek yaptigimzda 
           // asagidaki datalari alabilir . buraya sonradan data ekleyecez .
+
+           let city=myfunctions.getCountryNameAndPostalCode(doc.location).city
           let token = jwt.sign({
             username: doc.username,
             id: doc.id,
             isDelete: doc.isDelete,
-            bloodGroup:doc.bloodGroup
+            bloodGroup:doc.bloodGroup,
+            city:city
           }, 'secret', { expiresIn: '3h' });
 
           return res.status(200).json(token);

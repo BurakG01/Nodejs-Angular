@@ -3,4 +3,13 @@ export interface searchDataInterface {
    // City: string;
    blodGroupAndCity:string
   }
+
+  export interface City {
+   
+      City: string;
+  
+    }
+    
+    
+
   

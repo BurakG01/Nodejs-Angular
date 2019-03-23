@@ -19,7 +19,9 @@ router.post('/register', function (req, res, next) {
       address:req.body.address,
       location:req.body.location,
       isBenefactor:req.body.isBenefactor,
-      bloodAndCity:city+' '+req.body.bloodGroup
+      bloodAndCity:city+' '+req.body.bloodGroup,
+      city:city
+      
   
     });
 

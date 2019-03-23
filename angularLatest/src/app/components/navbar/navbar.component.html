@@ -21,22 +21,14 @@
           <form>
 
               <div class="input-group no-border">
-                  <input type="text"  class="form-control" placeholder="Pick one" aria-label="Number" [formControl]="myControl" [matAutocomplete]="auto">
+                  <input type="text"  class="form-control" placeholder="Pick one" aria-label="Number" >
                   <div class="input-group-append">
                     <div class="input-group-text">
-                        <i class="now-ui-icons ui-1_zoom-bold"  (click)="SearcValue()"></i>
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
                     </div>
                   </div>
                 </div>
-              
-            
-                
-                  <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async " [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete>
-              
+
                   
 
              

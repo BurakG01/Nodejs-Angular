@@ -54,7 +54,9 @@ export class UserProfileComponent implements OnInit {
     });
 
     this._myservice.getUserInfo().toPromise().then((response:any)=>{
+
       this.country=response.country;
+     
       this.city=response.city;
       this.postal_code=response.postal_code
       this.myForm.controls['username'].setValue(response.username);

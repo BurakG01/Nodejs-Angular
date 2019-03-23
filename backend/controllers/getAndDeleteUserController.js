@@ -9,7 +9,9 @@ const myfunctions = require('../myFunctions');
 
 router.get('/username', verifyToken, function (req, res, next) {
 
-  return res.status(200).json(decodedToken.username);
+  return res.status(200).json(decodedToken);
+
+
 })
 
 
@@ -31,7 +33,7 @@ router.get('/userinfo', verifyToken, function (req, res, next) {
         address: userinfo.location.formatted_address,
         isBenefactor: userinfo.isBenefactor,
         country: countryAndPostalCode.country,
-        city: userinfo.location.name,
+        city: countryAndPostalCode.city,
         postal_code: countryAndPostalCode.postal_code
 
       })
@@ -69,7 +71,7 @@ router.post('/update', verifyToken, function (req, res, next) {
 
 })
 
-router.post('/search', verifyToken, function (req, res, next) {
+/*router.post('/search', verifyToken, function (req, res, next) {
    let usersArray=[]
   User.find({bloodAndCity: req.body.blodGroupAndCity,isDelete:false,isBenefactor:true}, function(err, users) 
   {
@@ -94,7 +96,7 @@ router.post('/search', verifyToken, function (req, res, next) {
  
  
 
-})
+})*/
 
 
 router.get('/delete', verifyToken, function (req, res, next) {

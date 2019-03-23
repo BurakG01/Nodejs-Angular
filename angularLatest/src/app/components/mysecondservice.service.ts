@@ -14,15 +14,16 @@ import { from } from 'rxjs';
   providedIn: 'root'
 })
 export class MysecondserviceService {
-  private productUrl = 'api/searchdata/searchData.json';
-  constructor(private _http: HttpClient) { }
+
+  /*private productUrl = 'api/searchdata/searchData.json';
 
   getSearchData(): Observable<searchDataInterface[]> {
     return this._http.get<searchDataInterface[]>(this.productUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       
     );
-  }
+  }*/
+  constructor(private _http: HttpClient) { }
 
 
   getUserName() {
@@ -31,6 +32,13 @@ export class MysecondserviceService {
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
   }
+  getBloodAndCity() {
+    return this._http.get('http://localhost:3000/api/getbloodandcity', {
+      observe: 'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    });
+  }
+ 
  
   deleteUser() {
     return this._http.get('http://localhost:3000/api/delete', {

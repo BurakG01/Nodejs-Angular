@@ -33,11 +33,12 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
    constructor(private mySecondService:MysecondserviceService,
      private _router: Router) { 
-       this.mySecondService.getUserName()
-       .subscribe(
-         data => this.username= data.toString(),
-         error => this._router.navigate(['/main/login'])
-       )
+       this.mySecondService.getUserName().toPromise().then((response:any)=>{
+       console.log(response)
+       this.username= response.username
+       localStorage.setItem('city',response.city);
+       })
+     
  
      }
 
