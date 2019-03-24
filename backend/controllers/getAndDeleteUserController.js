@@ -71,32 +71,7 @@ router.post('/update', verifyToken, function (req, res, next) {
 
 })
 
-/*router.post('/search', verifyToken, function (req, res, next) {
-   let usersArray=[]
-  User.find({bloodAndCity: req.body.blodGroupAndCity,isDelete:false,isBenefactor:true}, function(err, users) 
-  {
-     if (err)
-     {
-      return res.status(500).json({message:err.message});
-     }
-     users.map((iter,index)=>{
-      usersArray.push([
-        [iter.email,iter.username,iter.phone_number],
-        
-        iter.location.geometry.location.lat,
-        iter.location.geometry.location.lng,
-        index
-      
-      ])
-     })
-     console.log(usersArray);
-     return res.status(200).json(usersArray);
- 
-  });
- 
- 
 
-})*/
 
 
 router.get('/delete', verifyToken, function (req, res, next) {

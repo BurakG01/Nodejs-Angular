@@ -37,23 +37,22 @@ router.post('/register', function (req, res, next) {
           return res.status(501).json({ message: 'This email has already exist.' });
         }
         else {
-          User.findOneAndUpdate({ email: req.body.email }, {
-            $set: {
-              "isDelete": false, 
-              "email": req.body.email,
-              "username": req.body.username,
-              "password": User.hashPassword(req.body.password),
-              "bloodGroup": req.body.bloodGroup,
-              "phone_number": req.body.phone_number,
-              "updated_dt": Date.now(),
-              "location":req.body.location,
-              "address":req.body.address ,
-              "isBeneficator":req.body.isBeneficator
+          User.deleteOne({email:req.body.email},function(err){
+            if(err){
+// burada return biseyler don
             }
-          }, { new: true }, (err, doc) => {
-  
-            return res.status(201).json(doc);
+            else{
+              user.updated_dt=Date.now();
+              let record = user.save();
+              record.then((doc) => {
+                return res.status(201).json(doc);
+              })
+              record.catch((err) => {
+                return res.status(501).json({ message: 'Error registering user.' })
+              })
+            }
           })
+        
         }
       }
       else {
