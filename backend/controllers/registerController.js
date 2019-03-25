@@ -24,13 +24,21 @@ router.post('/register', function (req, res, next) {
       
   
     });
-
-
+    user.save(err => {
+      if(err&&err.code===11000){
+        return res.status(500).json({message:"This email has already exist"});
+      }
+    else{
+      return res.status(200).json({message:'Your account was updated'});
+    }
+    })
+  })
+  module.exports = router;
 
 
    // emaili unique yaptim burada email var mi kontrolune gerek yok burayi duzelt bir ara
 
-    let promise = User.findOne({ email: req.body.email }).exec();
+   /* let promise = User.findOne({ email: req.body.email }).exec();
     promise.then((data) => {
       if (data) {
         if (data.isDelete == false) {
@@ -64,7 +72,6 @@ router.post('/register', function (req, res, next) {
           return res.status(501).json({ message: 'Error registering user.' })
         })
       }
-    })
+    })*/
   
-  })
-  module.exports = router;
+ 

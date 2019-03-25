@@ -48,26 +48,32 @@ router.get('/userinfo', verifyToken, function (req, res, next) {
 router.post('/update', verifyToken, function (req, res, next) {
   let userFindByid = decodedToken.id;
 
-   User.findOneAndUpdate({ _id:userFindByid }, {
-    $set: {
-     "email":req.body.email,
-     "username":req.body.username,
-     "phone_number":req.body.phone_number,
-     "address":req.body.address,
-     "isBenefactor":req.body.isBenefactor,
-     "location":req.body.location
+  User.findOne({_id:userFindByid}, function(err, user) {
+    console.log(Date.now())
+    if (err) {
+      throw err
+    } else {
+      if (user) {
+        user.email = req.body.email,
+        user.username=req.body.username,
+        user.phone_number=req.body.phone_number,
+        user.isBenefactor=req.body.isBenefactor,
+        user.location=req.body.location,
+        user.updated_dt=Date.now()
+        user.save(err => {
+          if(err&&err.code===11000){
+            return res.status(500).json({message:"This email has already exist"});
+          }
+        else{
+          return res.status(200).json({message:'Your account was updated'});
+        }
+        })
+      } else {
+        console.log("User was not found!")
+      }
     }
-  }, { runValidators: true, context: 'query' }, (err, doc) => {
-
-   if(err){
-     
-    return res.status(500).json({message:err.message});
-   }
-   else{
-    return res.status(200).json({message:'Your account was updated'});
-   }
   })
- 
+
 
 })
 

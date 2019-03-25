@@ -9,8 +9,8 @@ var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 var loginRouter=require('./controllers/loginController');
 var registerRouter=require('./controllers/registerController')
-var deleteRouter=require('./controllers/getAndDeleteUserController')
-var getUserRouter=require('./controllers/getAndDeleteUserController')
+//var deleteRouter=require('./controllers/getAndDeleteUserController')
+var getUserRouter=require('./controllers/userActionsController')
 var getAddressRouter=require('./controllers/adresController')
 var newPassRouter=require('./controllers/passwordController')
 var searchedUsers=require('./controllers/getSearchedUsersController')
@@ -42,7 +42,7 @@ app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/api',loginRouter);
 app.use('/api',registerRouter);
-app.use('/api',deleteRouter);
+//app.use('/api',deleteRouter);
 app.use('/api',getUserRouter);
 app.use('/api',getAddressRouter)
 app.use('/api',newPassRouter)
