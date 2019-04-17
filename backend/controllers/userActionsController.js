@@ -47,7 +47,7 @@ router.get('/userinfo', verifyToken, function (req, res, next) {
 
 router.post('/update', verifyToken, function (req, res, next) {
   let userFindByid = decodedToken.id;
-
+  var city=myfunctions.getCountryNameAndPostalCode(req.body.location).city
   User.findOne({_id:userFindByid}, function(err, user) {
     console.log(Date.now())
     if (err) {
@@ -60,6 +60,8 @@ router.post('/update', verifyToken, function (req, res, next) {
         user.isBenefactor=req.body.isBenefactor,
         user.location=req.body.location,
         user.updated_dt=Date.now()
+        user.city=city,
+        user.bloodAndCity=city+' '+user.bloodGroup,
         user.save(err => {
           if(err&&err.code===11000){
             return res.status(500).json({message:"This email has already exist"});

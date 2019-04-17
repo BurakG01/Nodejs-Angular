@@ -6,8 +6,10 @@ import 'rxjs/add/operator/toPromise'
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { ToastrService } from 'ngx-toastr';
 import {NotificationObj} from '../notificationConfig'
+import{environment} from '../../environments/environment'
+import { Router } from '@angular/router';
 
-
+declare var bootbox:any
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -20,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   country:''
   city:''
   postal_code:'';
-  notificationObjForSuccess={
+ /* notificationObjForSuccess={
     timeOut: 5000,
     closeButton: true,
     enableHtml: true,
@@ -33,12 +35,13 @@ export class UserProfileComponent implements OnInit {
     enableHtml: true,
     toastClass: "alert alert-danger alert-with-icon",
     positionClass: 'toast-top-right'
-  } as NotificationObj
+  } as NotificationObj*/
 
   
   
   constructor( private _myservice: MyserviceService,
-    private toastr:ToastrService) {
+    private toastr:ToastrService,
+    private _router: Router) {
 
     this.myForm = new FormGroup({
     
@@ -93,15 +96,53 @@ export class UserProfileComponent implements OnInit {
   UpdateProfile(){
     if (this.myForm.valid){
       this._myservice.UpdateProfile(this.myForm.value).toPromise().then((response:any)=>{
-        this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>'+response.message, '',this.notificationObjForSuccess);
+        this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span>'+response.message, '',
+        environment.notificationObjForSuccess);
 
       }).catch((err)=>{
-        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span>'+err.error.message, '', this.notificationObjForError);
+        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span>'+err.error.message, '',
+         environment.notificationObjForError);
       })
     }
 
     else {
-      this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> Please fill all mandotary fields', '', this.notificationObjForError);
+      this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> Please fill all mandotary fields', '',
+       environment.notificationObjForError);
     }
+  }
+
+  deleteAccount(){
+    bootbox.confirm({
+      message: "Are you sure that you want to delete your account ?",
+      buttons: {
+          confirm: {
+              label: 'Yes',
+              className: 'btn-success'
+          },
+          cancel: {
+              label: 'No',
+              className: 'btn-danger'
+          }
+      },
+      callback: (result)=> {
+        if(result){
+          this._myservice.deleteUser().toPromise().then((response)=>{
+
+            this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Your account was deleted !', '',
+            environment.notificationObjForSuccess);
+
+            setTimeout(() => {
+            
+              localStorage.removeItem('token');
+            this._router.navigate(['/main/login']);
+          }, 5000); 
+            
+            
+          }).catch((err)=>{
+
+          })
+        }
+      }
+  });
   }
 }

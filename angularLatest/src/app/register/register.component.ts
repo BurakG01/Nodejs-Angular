@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise'
 import { ToastrService } from 'ngx-toastr';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-
+import{environment} from '../../environments/environment'
 
 
 @Component({
@@ -90,13 +90,9 @@ export class RegisterComponent implements OnInit {
       this._myservice.submitRegister(this.myForm.value)
         .toPromise().then((response) => {
           //console.log(this.myForm.value)
-          this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to Blood Donation <b>success</b> - Registration Success', '', {
-            timeOut: 5000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-success alert-with-icon",
-            positionClass: 'toast-top-right'
-          });
+          this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to Blood Donation <b>success</b> - Registration Success', '',
+          environment.notificationObjForSuccess
+       );
           setTimeout(() => {
             
             this._router.navigate(['../login'], { relativeTo: this._activatedRoute });

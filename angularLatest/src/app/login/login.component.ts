@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/catch'; 
 import 'rxjs/add/operator/toPromise'
 import { ToastrService } from 'ngx-toastr';
- 
+import{environment} from '../../environments/environment'
 
 @Component({
   selector: 'app-login',
@@ -51,10 +51,18 @@ export class LoginComponent implements OnInit {
        // this.errormessage=err.error.message
         this.flag = true;
         
-        if(err.error.message=='User email is not registered.')
-        this.errormessageForEmail=err.error.message
-        if(err.error.message==' Invalid Credentials')
-        this.errormessageForPasword=err.error.message
+        if(err.error.message=='User email is not registered.'){
+          this.errormessageForEmail=err.error.message
+        }
+       
+        else if(err.error.message==' Invalid Credentials'){
+          this.errormessageForPasword=err.error.message
+        }
+        else{
+          this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span>'+err.error.message, '',
+         environment.notificationObjForError);
+        }
+    
         
       })
     
