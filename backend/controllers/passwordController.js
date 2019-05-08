@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var dateFormat = require('dateformat');
 var nodemailer = require('nodemailer');
-const config = require('../config');
+const config = require('../../config');
 const myFunctions = require('../myFunctions')
 
 router.post('/getconfirmationcode', function (req, res, next) {
