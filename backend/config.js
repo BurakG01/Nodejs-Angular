@@ -1,10 +1,11 @@
 module.exports = {
     auth: {
-        user: 'gundogdu.burak@outlook.com',
-        pass: 'Burak.6451'
+        user: 'YOUR_MAIL_ACCOUNT',
+        pass: 'YOUR_PASSWORD'
     },
     host: "smtp.live.com",
     port: 587,
-    mongoConnectionString:'mongodb://localhost/ricker'
+    mongoConnectionString:'YOUR_MONGODBCONNECTION'
+    // For ecample  : mongodb://localhost/ricker
     
 };
