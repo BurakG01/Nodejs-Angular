@@ -6,6 +6,6 @@ module.exports = {
     host: "smtp.live.com",
     port: 587,
     mongoConnectionString:'YOUR_MONGODBCONNECTION'
-    // For ecample  : mongodb://localhost/ricker
+    // For example  : mongodb://localhost/ricker
     
 };
