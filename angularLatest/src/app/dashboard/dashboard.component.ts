@@ -473,7 +473,12 @@ export class DashboardComponent implements OnInit {
       ]
    },
    options: {
-   
+    title: {
+      display: true,
+      text: 'Benefactor Statistics',
+      fontSize: 30,
+      fontColor:'#FFF'
+  },
     layout: {
         padding: {
             left: 20,

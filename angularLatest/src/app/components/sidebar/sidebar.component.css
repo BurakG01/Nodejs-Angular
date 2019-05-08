@@ -1,3 +1,4 @@
 ::ng-deep .sidebar[data-color="red"]:after, .off-canvas-sidebar[data-color="red"]:after {
     background: black;
 }
+

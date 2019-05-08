@@ -98,7 +98,7 @@ export class MapsComponent implements OnInit {
         return function () {
           //burayi sonra duzelt
           infowindow.setContent("<div class='card card-user>" +
-            "<div class='card-body'> <div class='author'> <a href='#''><p class='description text-center'>" +
+            "<div class='card-body'> <div class='author'> <a href='/maps'><p class='description text-center'>" +
             "<img class='avatar border-gray' src='../assets/img/mike.jpg' alt='...'></p> " +
             "<h5 class='title'>" + response[i][0][0] + "</h5></a> <p class='description text-center'>" + response[i][0][1] + " </p>" +
             "<p class='description text-center'>" + response[i][0][2] + " </p> </div>" +
