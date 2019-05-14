@@ -17,8 +17,9 @@ declare var bootbox:any
 })
 export class UserProfileComponent implements OnInit {
 
- 
+  url = '';
   myForm: FormGroup;
+  ProfilePictureForm: FormGroup;
   country:''
   city:''
   postal_code:'';
@@ -55,9 +56,12 @@ export class UserProfileComponent implements OnInit {
       location:new FormControl(null)
      
     });
-
+  this.ProfilePictureForm=
+  new FormGroup({
+    url:new FormControl(null)
+  });
     this._myservice.getUserInfo().toPromise().then((response:any)=>{
-
+    console.log(response)
       this.country=response.country;
      
       this.city=response.city;
@@ -69,6 +73,7 @@ export class UserProfileComponent implements OnInit {
       this.myForm.controls['isBenefactor'].setValue(response.isBenefactor);
       this.myForm.controls['phone_number'].setValue(response.phone_number);
       this.myForm.controls['location'].setValue(response.location);
+      this.url=response.profilePicture;
     })
 
    
@@ -110,7 +115,33 @@ export class UserProfileComponent implements OnInit {
        environment.notificationObjForError);
     }
   }
+ 
+ 
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
 
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => {
+     
+              this.url=(<FileReader>event.target).result as string
+              if(this.url){
+                this.ProfilePictureForm.controls['url'].setValue(this.url);
+                this._myservice.UploadProfilePicture(this.ProfilePictureForm.value).toPromise().then((response:any)=>{
+                
+                })
+              }
+             
+      
+        
+      }
+    }
+  }
+  public delete(){
+    this.url = null;
+  }
+ 
   deleteAccount(){
     bootbox.confirm({
       message: "Are you sure that you want to delete your account ?",

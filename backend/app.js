@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const config=require('../config')
+var bodyParser = require('body-parser')
+
+
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -15,6 +18,7 @@ var getAddressRouter=require('./controllers/adresController')
 var newPassRouter=require('./controllers/passwordController')
 var searchedUsers=require('./controllers/getSearchedUsersController')
 var recordStatistics=require('./controllers/getRecordStatisticsController')
+var profilePicture=require('./controllers/userActionsController')
 var app = express();
 
 // add mongoose 
@@ -26,7 +30,8 @@ var cors = require('cors');
 app.use(cors({
   origin:'http://localhost:4200'
 }));
-
+app.use(bodyParser.urlencoded({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,8 +53,7 @@ app.use('/api',getAddressRouter)
 app.use('/api',newPassRouter)
 app.use('/api',searchedUsers)
 app.use('/api',recordStatistics)
-
-
+app.use('/api',profilePicture)
 
 
 

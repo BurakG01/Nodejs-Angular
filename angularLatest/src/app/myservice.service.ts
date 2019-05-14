@@ -76,6 +76,12 @@ getRecordStatistics() {
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
   }
+  UploadProfilePicture(body:any) {
+    return this._http.post('http://localhost:3000/api/profile-picture',body, {
+      observe: 'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    });
+  }
  
  
   deleteUser() {

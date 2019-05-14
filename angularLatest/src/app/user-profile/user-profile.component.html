@@ -147,15 +147,21 @@
           <img src="../assets/img/bg5.jpg" alt="...">
         </div>
         <div class="card-body">
-          <div class="author">
-            <a href="/user-profile">
-              <img class="avatar border-gray"  src="../assets/img/mike.jpg" alt="...">
+        <div class="author">
+            <label class="hoverable"  for="fileInput">
+           
+              <img class="avatar border-gray"   [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'" alt="...">
+             
+              <div class="background"></div>
               <h5 class="title">Mike Andrew</h5>
-            </a>
+            
             <p class="description">
               michael24
             </p>
+
+          </label>
           </div>
+          <input id="fileInput" type='file' (change)="onSelectFile($event)">
           <p class="description text-center">
             "Lamborghini Mercy
             <br> Your chick she so thirsty

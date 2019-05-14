@@ -18,7 +18,8 @@ var schema = new Schema(
     location:{type:Object,require:true},
     isBenefactor:{type:Boolean,require:true},
     bloodAndCity:{type:String},
-    city:{type:String}
+    city:{type:String},
+    profilePicture:{type:String}
 
 
 },{ emitIndexErrors: true });

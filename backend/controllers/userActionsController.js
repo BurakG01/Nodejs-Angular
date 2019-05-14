@@ -34,7 +34,8 @@ router.get('/userinfo', verifyToken, function (req, res, next) {
         isBenefactor: userinfo.isBenefactor,
         country: countryAndPostalCode.country,
         city: countryAndPostalCode.city,
-        postal_code: countryAndPostalCode.postal_code
+        postal_code: countryAndPostalCode.postal_code,
+        profilePicture:userinfo.profilePicture
 
       })
 
@@ -78,6 +79,37 @@ router.post('/update', verifyToken, function (req, res, next) {
 
 
 })
+
+router.post('/profile-picture', verifyToken, function (req, res, next) {
+  let userFindByid = decodedToken.id;
+ 
+
+  User.findOne({_id:userFindByid}, function(err, user) {
+
+    if (err) {
+      throw err
+    } else {
+      if (user) {
+        user.profilePicture = req.body.url,
+       
+        user.save(err => {
+          if(err){
+           
+            return res.status(500).json({message:"Something went wrong"});
+          }
+        else{
+          return res.status(200).json({message:'Your image uploaded'});
+        }
+        })
+      } else {
+        console.log("User was not found!")
+      }
+    }
+  })
+
+
+})
+
 
 
 
