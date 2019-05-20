@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var uniqueValidator = require('mongoose-unique-validator');
+const SocketManager=require('../SocketManager')
 
 var schema = new Schema(
 {
@@ -31,6 +32,8 @@ schema.statics.hashPassword = function hashPassword(password){
 }
 // silinmis email ile kayit gelirse gercekten eskisini siliyorum.
 schema.pre('save', function (next) {
+    this.wasNew = this.isNew
+   
     let user = this 
     if(user.isModified('email')) {
       this.constructor.deleteOne({email:this.email, isDelete:true}, (err) => {
@@ -40,6 +43,12 @@ schema.pre('save', function (next) {
       next()
     }
   })
+  schema.post('save', function() {
+    if(this.wasNew&&this.isBenefactor) {
+      console.log(this)
+      SocketManager.notifyEveryone(this.username +' has joined us from '+ this.city+' as Benefactor')
+    }
+})
 
 
 schema.methods.isValid = function(hashedpassword){

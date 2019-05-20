@@ -8,12 +8,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise'
 import { from } from 'rxjs';
-
+import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MysecondserviceService {
+  private url = 'http://localhost:3000';
+  private socket;    
 
   /*private productUrl = 'api/searchdata/searchData.json';
 
@@ -23,8 +25,17 @@ export class MysecondserviceService {
       
     );
   }*/
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
 
+    this.socket = io(this.url);
+   }
+   public getNotification = () => {
+    return Observable.create((observer) => {
+        this.socket.on('notification', (message) => {
+            observer.next(message);
+        });
+    });
+}
 
   getUserName() {
     return this._http.get('http://localhost:3000/api/username', {

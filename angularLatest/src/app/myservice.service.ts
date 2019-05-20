@@ -15,8 +15,14 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 @Injectable()
 export class MyserviceService {
 
+
+  constructor(private _http: HttpClient) {
+  
+
+   }
+
+
  
-  constructor(private _http: HttpClient) { }
   getConfirmationCode(body:any)  {
 
     return this._http.post('http://localhost:3000/api/getconfirmationcode', body,{

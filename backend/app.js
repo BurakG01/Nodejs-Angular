@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const config=require('../config')
 var bodyParser = require('body-parser')
-
+const SocketManager= require('./SocketManager')
 
 
 var indexRouter = require('./routes/index');
@@ -20,7 +20,9 @@ var searchedUsers=require('./controllers/getSearchedUsersController')
 var recordStatistics=require('./controllers/getRecordStatisticsController')
 var profilePicture=require('./controllers/userActionsController')
 var app = express();
-
+const async = require('async')
+const http = require('http')
+app.server = http.createServer(app);
 // add mongoose 
 var mongoose = require('mongoose');
 mongoose.connect(config.mongoConnectionString);
@@ -73,4 +75,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+SocketManager.start(express, app)
+  .then((isRunning) => {
+    app.server.listen(3000, () => {
+      console.log('server started')
+    });
+  })
+  .catch(err => {throw err})
 module.exports = app;

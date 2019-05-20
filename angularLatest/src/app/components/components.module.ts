@@ -10,7 +10,7 @@ import { MysecondserviceService} from './mysecondservice.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material';
-
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +20,9 @@ import {MatInputModule} from '@angular/material';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    ToastrModule.forRoot(),
+    ToastContainerModule,
   
   ],
   declarations: [

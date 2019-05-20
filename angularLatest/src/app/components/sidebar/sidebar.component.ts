@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MysecondserviceService } from '../mysecondservice.service';
-
+import { ToastrService } from 'ngx-toastr';
+import {environment} from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 declare interface RouteInfo {
@@ -34,7 +35,8 @@ export class SidebarComponent implements OnInit {
   username = '';
   menuItems: any[];
    constructor(private mySecondService:MysecondserviceService,
-     private _router: Router) { 
+     private _router: Router,
+     private toastr: ToastrService) { 
        this.mySecondService.getUserName().toPromise().then((response:any)=>{
        console.log(response)
        this.username= response.username
@@ -45,7 +47,20 @@ export class SidebarComponent implements OnInit {
      }
 
   ngOnInit() {
-   
+    this.mySecondService
+    .getNotification()
+    .subscribe((message: string) => {
+     // this.messages.push(message);
+     if (message){
+
+      this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> NEW RECORD  <b>success</b> - '+ message, '',
+      environment.notificationObjForSuccess
+   );
+       console.log(message)
+
+     }
+    });
+
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {
